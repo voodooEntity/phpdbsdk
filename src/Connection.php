@@ -22,7 +22,7 @@ class Connection {
     
     public static function initGuzzleClient() {
         $baseUrl = "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/";
-        self::$guzzleClient = new GuzzleHttp\Client([
+        self::$guzzleClient = new Client([
             'base_uri' => $baseUrl
         ]);
     }
