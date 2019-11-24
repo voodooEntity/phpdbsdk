@@ -1,8 +1,9 @@
 <?php
 namespace MERDE;
+use MERDE\Actions;
 use \GuzzleHttp\Client;
 
-class Connection {
+class Connection extends Actions{
     
     private static $host = false;
     private static $port = false;
@@ -35,6 +36,10 @@ class Connection {
         if("pong" != $ret->getBody()) {
             throw new \Exception("Database server not reachable! ( " . "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/ping )");
         }
+    }
+    
+    public static function getGuzzleClient() {
+        return self::$guzzleClient;
     }
     
     
