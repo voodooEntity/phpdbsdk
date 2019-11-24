@@ -1,9 +1,8 @@
 <?php
 namespace MERDE;
-use MERDE\Actions;
 use \GuzzleHttp\Client;
 
-class Connection extends Actions{
+class Connection {
     
     private static $host = false;
     private static $port = false;
