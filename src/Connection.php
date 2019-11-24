@@ -15,7 +15,7 @@ class Connection {
         self::$port = $port;
         self::$version = $version;
         // init our http client
-        $this->initGuzzleClient()
+        $this->initGuzzleClient();
         // test if the connection works
         $this->testConnection();
     }
