@@ -20,6 +20,15 @@ class Api {
         return $data;
     }
     
+    public function getEntitiesByType($type) {
+        // build the request string
+        $path = "getEntitiesByType?type=" . $type;
+        $ret = $this->client->request("GET",$path);
+        $body = $ret->getBody();
+        $data = json_decode($body);
+        return $data;
+    }
+    
     
 }
 
