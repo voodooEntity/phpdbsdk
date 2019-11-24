@@ -15,19 +15,19 @@ class Connection {
         self::$port = $port;
         self::$version = $version;
         // init our http client
-        $this->initGuzzleClient();
+        self::initGuzzleClient();
         // test if the connection works
-        $this->testConnection();
+        self::testConnection();
     }
     
-    public static initGuzzleClient() {
+    public static function initGuzzleClient() {
         $baseUrl = "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/";
         self::$guzzleClient = new GuzzleHttp\Client([
             'base_uri' => $baseUrl
         ]);
     }
     
-    public static testConnection() {
+    public static function testConnection() {
         $ret = self::$guzzleClient->request('GET','ping');
         if("pong" != $ret) {
             throw new Exception("Database server not reachable! ( " . "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/ping )");
