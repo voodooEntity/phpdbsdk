@@ -30,11 +30,10 @@ class Api {
     public function parseReturn($ret) {
         $data = $ret->getBody();
         $transport = json_decode($data,true);
-        var_dump($transport);
         if($transport["State"] == "error") {
             throw new \Exception($transport["Error"]);
         }
-        return $transport;
+        return $transport["Data"];
     }
     
 }
