@@ -13,7 +13,7 @@ class Entity  {
     
     public function __construct($type = false, $id = false) {
         if(false !== $id && false !== $type) {
-            $this->__load($type, $id)
+            $this->__load($type, $id);
         }
     }
     
