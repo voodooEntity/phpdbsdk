@@ -36,6 +36,30 @@ class Api {
         return $transport["Data"];
     }
     
+    public function createEntity($type,$value,$properties,$context) {
+        $ret = $this->client->request->("POST", [
+            GuzzleHttp\RequestOptions::JSON => [
+                'Type' => $type,
+                "Value" => $value,
+                "Properties" => $properties,
+                "Context" => $context
+            ]
+        ]);
+        $data = $this->parseReturn($ret);
+    }
+    
+    public function updateEntity($type,$id,$value,$properties,$context) {
+        $ret = $this->client->request->("PUT", [
+            GuzzleHttp\RequestOptions::JSON => [
+                'Type' => $type,
+                'ID' => $id,
+                "Value" => $value,
+                "Properties" => $properties,
+                "Context" => $context
+            ]
+        ]);
+        $data = $this->parseReturn($ret);
+    }
 }
 
 

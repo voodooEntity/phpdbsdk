@@ -4,17 +4,19 @@ use MERDE\Api;
 
 class Entity  {
     
-    private $id;
-    private $type;
+    private $id = null;
+    private $type = null;
     private $properties = [];
-    private $context;
-    private $value;
+    private $context = null;
+    private $value = null;
     private $exists = false;
+    private $api;
     
     public function __construct($type = false, $id = false) {
         if(false !== $id && false !== $type) {
             $this->__load($type, $id);
         }
+        $this->api = new Api();
     }
     
     public function setId($id) {
@@ -78,8 +80,7 @@ class Entity  {
     }
     
     private function __load($type,$id) {
-        $api = new Api();
-        $ret = $api->getEntityByTypeAndId($type,$id);
+        $ret = $this->api->getEntityByTypeAndId($type,$id);
         $this->setType($type);
         $this->setId($id);
         $this->exists = true;
@@ -89,6 +90,33 @@ class Entity  {
         $this->setContext($entity["Context"]);
     }
     
-    public function save() {}
+    public function save($create = true) {
+        if(!$this->exists && $create) {
+            $this->__create();
+        } else if($this->exists) {
+            $this->__update();
+        }
+    }
+    
+    private function __update() {
+        $this->api->updateEntity(
+            $this->getType(),
+            $this->getId(),
+            $this->getValue(),
+            $this->getproperties(),
+            $this->getContext()
+        );
+    }
+    
+    private function __create() {
+        $this->api->createEntity(
+            $this->getType(),
+            $this->getId(),
+            $this->getValue(),
+            $this->getproperties(),
+            $this->getContext()
+        );
+        $this->exists = 1;
+    }
     
 }
