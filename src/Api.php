@@ -15,8 +15,7 @@ class Api {
             $path .= "&traverse=" . $traverse;
         }
         $ret = $this->client->request("GET",$path);
-        $body = $ret->getBody();
-        $data = json_decode($body);
+        $data = $this->parseReturn($ret);
         return $data;
     }
     
@@ -24,11 +23,18 @@ class Api {
         // build the request string
         $path = "getEntitiesByType?type=" . $type;
         $ret = $this->client->request("GET",$path);
-        $body = $ret->getBody();
-        $data = json_decode($body);
+        $data = $this->parseReturn($ret);
         return $data;
     }
     
+    public function parseReturn($ret) {
+        $data = $ret->getBody();
+        $transport = json_decode($data,true);
+        if($transport["state"] == "error") {
+            throw new \Exception($transport["Error"]);
+        }
+        return $transport;
+    }
     
 }
 
