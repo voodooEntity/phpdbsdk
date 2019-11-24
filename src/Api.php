@@ -14,7 +14,7 @@ class Api {
         if(false !== $traverse) {
             $path .= "&traverse=" . $traverse;
         }
-        $ret = $client->request("GET",$path);
+        $ret = $this->client->request("GET",$path);
         $body = $ret->getBody();
         $data = json_decode($body);
         return $data;
