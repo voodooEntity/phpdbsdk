@@ -38,7 +38,7 @@ class Api {
     
     public function createEntity($type,$value,$properties,$context) {
         $ret = $this->client->request("POST", [
-            GuzzleHttp\RequestOptions::JSON => [
+            \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
                 "Value" => $value,
                 "Properties" => $properties,
