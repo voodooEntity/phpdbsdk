@@ -11,7 +11,7 @@ class Api {
     public function getEntityByTypeAndId($type,$id,$traverse = false)  {
         // build the request string
         $path = "getEntityByTypeAndId?type=" . $type . "&id=" . $id;
-        if(false !=== $traverse) {
+        if(false !== $traverse) {
             $path .= "&traverse=" . $traverse;
         }
         $ret = $client->request("GET",$path);
