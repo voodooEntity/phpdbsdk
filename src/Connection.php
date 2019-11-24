@@ -1,6 +1,6 @@
 <?php
 namespace MERDE;
-use GuzzleHttp\Client;
+use \GuzzleHttp\Client;
 
 class Connection {
     
