@@ -101,6 +101,13 @@ class Entity  {
         }
     }
     
+    public function delete() {
+        if($this->exists) {
+            $this->__delete();
+        }
+        $this = null;
+    }
+    
     private function __update() {
         $this->api->updateEntity(
             $this->getType(),
@@ -120,6 +127,13 @@ class Entity  {
         );
         $this->setId($data["Entities"][0]["ID"]);
         $this->exists = 1;
+    }
+    
+    private function __delete() {
+        $this->api->deleteEntity(
+            $this->getType(),
+            $this->getId()
+        );
     }
     
 }

@@ -60,6 +60,12 @@ class Api {
         ]);
         $data = $this->parseReturn($ret);
     }
+    
+    public function deleteEntity($type,$id) {
+        $path = "deleteEntity?id=" . $id . "&type=" . $type; 
+        $ret = $this->client->request("DELETE", $path);
+        $this->parseReturn($ret);
+    }
 }
 
 
