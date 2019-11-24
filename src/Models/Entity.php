@@ -109,13 +109,13 @@ class Entity  {
     }
     
     private function __create() {
-        $this->api->createEntity(
+        $data = $this->api->createEntity(
             $this->getType(),
-            $this->getId(),
             $this->getValue(),
             $this->getproperties(),
             $this->getContext()
         );
+        $this->setId($data["Entities"][0]["ID"]);
         $this->exists = 1;
     }
     
