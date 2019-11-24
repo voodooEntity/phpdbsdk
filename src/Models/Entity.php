@@ -73,6 +73,10 @@ class Entity  {
         $this->value = $value;
     }
     
+    public function getValue() {
+        return $this->value;
+    }
+    
     private function __load($type,$id) {
         $api = new Api();
         $ret = $api->getEntityByTypeAndId($type,$id);
