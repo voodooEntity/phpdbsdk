@@ -13,10 +13,10 @@ class Entity  {
     private $api;
     
     public function __construct($type = false, $id = false) {
+        $this->api = new Api();
         if(false !== $id && false !== $type) {
             $this->__load($type, $id);
         }
-        $this->api = new Api();
     }
     
     public function setId($id) {
