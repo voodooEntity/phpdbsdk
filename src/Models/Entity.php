@@ -64,6 +64,7 @@ class Entity  {
         $this->type = $type;
         $this->id = $id;
         $entity = $ret["Entities"][0];
+        var_dump($entity);
         $this->setValue($entity["Value"]);
         $this->setProperties($entity["Properties"]);
         $this->setContext($entity["Context"]);
