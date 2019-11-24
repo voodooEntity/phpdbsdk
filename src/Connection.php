@@ -9,15 +9,18 @@ class Connection {
     private static $version = false;
     private static $guzzleClient = false;
     
-    public function __construct($host,$port,$version) {
+    public function __construct($host,$port,$version, $contest = false) {
         // store base info
         self::$host = $host;
         self::$port = $port;
         self::$version = $version;
         // init our http client
         self::initGuzzleClient();
-        // test if the connection works
-        self::testConnection();
+        // if wanted, we also make a connection test
+        if(true === $contest) {
+            // test if the connection works
+            self::testConnection();
+        }
     }
     
     public static function initGuzzleClient() {
@@ -30,7 +33,6 @@ class Connection {
     public static function testConnection() {
         $ret = self::$guzzleClient->request('GET','ping');
         if("pong" != $ret->getBody()) {
-            var_dump($ret)->getBody();
             throw new \Exception("Database server not reachable! ( " . "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/ping )");
         }
     }
