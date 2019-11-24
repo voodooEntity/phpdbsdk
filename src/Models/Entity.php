@@ -17,6 +17,21 @@ class Entity  {
         }
     }
     
+    public function setId($id) {
+        if($this->exists) {
+            return false;
+        }
+        $this->id = $id;
+    }
+    
+    public function setType($type) {
+        if($this->exists) {
+            return false;
+        }
+        $this->type = $type;
+    }
+    
+    
     public function getId() {
         return $this->id;
     }
@@ -61,13 +76,15 @@ class Entity  {
     private function __load($type,$id) {
         $api = new Api();
         $ret = $api->getEntityByTypeAndId($type,$id);
-        $this->type = $type;
-        $this->id = $id;
+        $this->setType($type);
+        $this->setId($id);
+        $this->exists = true;
         $entity = $ret["Entities"][0];
-        var_dump($entity);
         $this->setValue($entity["Value"]);
         $this->setProperties($entity["Properties"]);
         $this->setContext($entity["Context"]);
     }
+    
+    public function save() {}
     
 }
