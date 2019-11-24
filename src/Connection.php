@@ -30,6 +30,7 @@ class Connection {
     public static function testConnection() {
         $ret = self::$guzzleClient->request('GET','ping');
         if("pong" != $ret) {
+            var_dump($ret);
             throw new \Exception("Database server not reachable! ( " . "http://" . self::$host . ":" . self::$port . "/" . self::$version . "/ping )");
         }
     }
