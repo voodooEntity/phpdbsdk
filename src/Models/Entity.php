@@ -6,7 +6,7 @@ class Entity  {
     
     private $id = null;
     private $type = null;
-    private $properties = [];
+    private $properties = null;
     private $context = null;
     private $value = null;
     private $exists = false;
@@ -57,6 +57,9 @@ class Entity  {
     }
     
     public function addProperty($key,$value) {
+        if(null == $this->properties) {
+            $this->properties = [];
+        }
         $this->properties[$key] = $value;
     }
     
@@ -65,7 +68,7 @@ class Entity  {
     }
     
     public function getProperty($key) {
-        if(isset($this->properties[$key])) {
+        if(is_array($this->properties) && isset($this->properties[$key])) {
             return $this->properties[$key];
         }
         return null;
