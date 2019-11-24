@@ -105,7 +105,7 @@ class Entity  {
         if($this->exists) {
             $this->__delete();
         }
-        $this = null;
+        //$this = null;
     }
     
     private function __update() {
