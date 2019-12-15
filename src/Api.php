@@ -64,11 +64,10 @@ class Api {
     
     public function parseReturn($ret) {
         $data = $ret->getBody();
-        $transport = json_decode($data,true);
-        if($transport["State"] == "error") {
-            throw new \Exception($transport["Error"]);
+        if($ret->getStatusCode() != 200) {
+            throw new \Exception($data);
         }
-        return $transport["Data"];
+        return json_decode($data,true);
     }
     
     public function createEntity($type,$value,$properties,$context) {
