@@ -102,10 +102,11 @@ class Api {
     }
 
     public function mapJson($json) {
-        $ret = $this->client->request("POST", "createEntity", [
+        $ret = $this->client->request("POST", "mapJson", [
            "body" => $json
         ]);
         $data = $this->parseReturn($ret);
+        return $data;
     }
 
     public function getRelation($srcType,$srcID,$targetType,$targetID) {
