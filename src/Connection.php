@@ -14,8 +14,10 @@ class Connection {
         self::$host = $host;
         self::$port = $port;
         self::$version = $version;
+
         // init our http client
         self::initGuzzleClient();
+
         // if wanted, we also make a connection test
         if(true === $contest) {
             // test if the connection works
@@ -40,6 +42,5 @@ class Connection {
     public static function getGuzzleClient() {
         return self::$guzzleClient;
     }
-    
     
 }

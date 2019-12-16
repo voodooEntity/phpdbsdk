@@ -19,7 +19,7 @@ class Entity  {
         }
     }
     
-    public function setId($id) {
+    public function setID($id) {
         if($this->exists) {
             return false;
         }
@@ -33,8 +33,7 @@ class Entity  {
         $this->type = $type;
     }
     
-    
-    public function getId() {
+    public function getID() {
         return $this->id;
     }
     
@@ -85,7 +84,7 @@ class Entity  {
     private function __load($type,$id) {
         $ret = $this->api->getEntityByTypeAndId($type,$id);
         $this->setType($type);
-        $this->setId($id);
+        $this->setID($id);
         $this->exists = true;
         $entity = $ret["Entities"][0];
         $this->setValue($entity["Value"]);
@@ -105,13 +104,12 @@ class Entity  {
         if($this->exists) {
             $this->__delete();
         }
-        //$this = null;
     }
     
     private function __update() {
         $this->api->updateEntity(
             $this->getType(),
-            $this->getId(),
+            $this->getID(),
             $this->getValue(),
             $this->getproperties(),
             $this->getContext()
@@ -132,7 +130,7 @@ class Entity  {
     private function __delete() {
         $this->api->deleteEntity(
             $this->getType(),
-            $this->getId()
+            $this->getID()
         );
     }
     

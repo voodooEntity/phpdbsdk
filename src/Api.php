@@ -114,4 +114,39 @@ class Api {
         $data = $this->parseReturn($ret);
         return $data;
     }
+    
+    public function createRelation($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+        $ret = $this->client->request("POST", "createRelation", [
+            \GuzzleHttp\RequestOptions::JSON => [
+                'SourceType' => $srcType,
+                "SourceID" => $srcID,
+                'TargetType' => $targetType,
+                "TargetID" => $targetID,
+                "Properties" => $properties,
+                "Context" => $context
+            ]
+        ]);
+        $data = $this->parseReturn($ret);
+    }
+    
+    public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+        $ret = $this->client->request("PUT", "updateRelation", [
+            GuzzleHttp\RequestOptions::JSON => [
+                'SourceType' => $srcType,
+                "SourceID" => $srcID,
+                'TargetType' => $targetType,
+                "TargetID" => $targetID,
+                "Properties" => $properties,
+                "Context" => $context
+            ]
+        ]);
+        $data = $this->parseReturn($ret);
+    }
+    
+    public function deleteRelation($srcType,$srcID,$targetType,$targetID){
+        $path = "deleteRelation?srcType=" . $srcType . "&srcID=" . $srcID . "&targetType=" . $targetType ."&targetID=" . $targetID; 
+        $ret = $this->client->request("DELETE", $path);
+        $this->parseReturn($ret);
+    }
+    
 }
