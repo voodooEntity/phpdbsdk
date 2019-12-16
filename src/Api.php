@@ -70,7 +70,10 @@ class Api {
         return json_decode($data,true);
     }
     
-    public function createEntity($type,$value,$properties,$context) {
+    public function createEntity($type,$value,$properties = [],$context = "") {
+        if([] == $properties) {
+            $properties = new stdClass();
+        }
         $ret = $this->client->request("POST", "createEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
@@ -82,7 +85,10 @@ class Api {
         $data = $this->parseReturn($ret);
     }
     
-    public function updateEntity($type,$id,$value,$properties,$context) {
+    public function updateEntity($type,$id,$value,$properties = [],$context = "") {
+        if([] == $properties) {
+            $properties = new stdClass();
+        }
         $ret = $this->client->request("PUT", "updateEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
@@ -116,7 +122,10 @@ class Api {
         return $data;
     }
     
-    public function createRelation($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+    public function createRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
+        if([] == $properties) {
+            $properties = new stdClass();
+        }
         $ret = $this->client->request("POST", "createRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'SourceType' => $srcType,
@@ -130,7 +139,10 @@ class Api {
         $data = $this->parseReturn($ret);
     }
     
-    public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+    public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
+        if([] == $properties) {
+            $properties = new stdClass();
+        }
         $ret = $this->client->request("PUT", "updateRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'SourceType' => $srcType,
