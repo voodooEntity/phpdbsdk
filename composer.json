@@ -1,6 +1,6 @@
 {
-    "name": "voodooentity/phpdbsdk",
-    "description": "PHP Sdk for my database that has no name yet",
+    "name": "voodooentity/slingshotdb-php-sdk",
+    "description": "PHP SDK for slingshot db",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^6.4"
