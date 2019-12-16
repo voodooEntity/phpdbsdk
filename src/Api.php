@@ -84,7 +84,7 @@ class Api {
     
     public function updateEntity($type,$id,$value,$properties,$context) {
         $ret = $this->client->request("PUT", "updateEntity", [
-            GuzzleHttp\RequestOptions::JSON => [
+            \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
                 'ID' => $id,
                 "Value" => $value,
@@ -132,7 +132,7 @@ class Api {
     
     public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties,$context) {
         $ret = $this->client->request("PUT", "updateRelation", [
-            GuzzleHttp\RequestOptions::JSON => [
+            \GuzzleHttp\RequestOptions::JSON => [
                 'SourceType' => $srcType,
                 "SourceID" => $srcID,
                 'TargetType' => $targetType,
