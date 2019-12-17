@@ -123,6 +123,7 @@ class Entity  {
             $this->getproperties(),
             $this->getContext()
         );
+        var_dump($data);
         $this->setID($data["Entities"][0]["ID"]);
         $this->exists = 1;
     }
