@@ -147,8 +147,10 @@ class Relation  {
     
     private function __delete() {
         $this->api->deleteRelation(
-            $this->getType(),
-            $this->getId()
+            $this->getSourceType(),
+            $this->getSourceID(),
+            $this->getTargetType(),
+            $this->getTargetID()
         );
     }
     
