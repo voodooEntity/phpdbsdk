@@ -100,6 +100,7 @@ class Api {
             ]
         ]);
         $data = $this->parseReturn($ret);
+        return $data;
     }
     
     public function deleteEntity($type,$id) {
@@ -138,6 +139,7 @@ class Api {
             ]
         ]);
         $data = $this->parseReturn($ret);
+        return $data;
     }
     
     public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
@@ -155,6 +157,7 @@ class Api {
             ]
         ]);
         $data = $this->parseReturn($ret);
+        return $data;
     }
     
     public function deleteRelation($srcType,$srcID,$targetType,$targetID){
