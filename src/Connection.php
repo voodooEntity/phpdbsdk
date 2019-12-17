@@ -1,5 +1,5 @@
 <?php
-namespace MERDE;
+namespace Slingshot;
 use \GuzzleHttp\Client;
 
 class Connection {

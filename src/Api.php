@@ -1,6 +1,6 @@
 <?php
-namespace MERDE;
-use MERDE\Connection;
+namespace Slingshot;
+use Slingshot\Connection;
 
 class Api {
     

@@ -1,6 +1,6 @@
 <?php
-namespace MERDE\Models;
-use MERDE\Api;
+namespace Slingshot\Models;
+use Slingshot\Api;
 
 class Relation  {
     
