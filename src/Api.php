@@ -83,6 +83,7 @@ class Api {
             ]
         ]);
         $data = $this->parseReturn($ret);
+        return $data;
     }
     
     public function updateEntity($type,$id,$value,$properties = [],$context = "") {
