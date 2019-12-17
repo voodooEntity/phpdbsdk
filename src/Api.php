@@ -72,7 +72,7 @@ class Api {
     
     public function createEntity($type,$value,$properties = [],$context = "") {
         if([] == $properties) {
-            $properties = new stdClass();
+            $properties = new \stdClass();
         }
         $ret = $this->client->request("POST", "createEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
@@ -87,7 +87,7 @@ class Api {
     
     public function updateEntity($type,$id,$value,$properties = [],$context = "") {
         if([] == $properties) {
-            $properties = new stdClass();
+            $properties = new \stdClass();
         }
         $ret = $this->client->request("PUT", "updateEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
@@ -124,7 +124,7 @@ class Api {
     
     public function createRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
         if([] == $properties) {
-            $properties = new stdClass();
+            $properties = new \stdClass();
         }
         $ret = $this->client->request("POST", "createRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
@@ -141,7 +141,7 @@ class Api {
     
     public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
         if([] == $properties) {
-            $properties = new stdClass();
+            $properties = new \stdClass();
         }
         $ret = $this->client->request("PUT", "updateRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
