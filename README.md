@@ -129,6 +129,7 @@ $entity->save();
 $entity->delete();
 ```
 
+### Relation Model   
 
 Create a new Relation using the model
 ```php
