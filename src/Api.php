@@ -205,7 +205,7 @@ class Api {
 
         // if there are any entities
         if(0 < count($data["Entities"])) {
-            $set = $this->recusriveTransformChildren($data["Entities"]);
+            $set = $this->recursiveTransformChildren($data["Entities"]);
         }
 
         // if there are relations
