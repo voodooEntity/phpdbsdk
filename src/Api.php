@@ -227,7 +227,7 @@ class Api {
         return $set;
     }
 
-    private function recursiveTransformChildren($arrEntities) {
+    private function recursiveTransformChildren($data) {
         // prepare a set
         $set = new Set();
 
