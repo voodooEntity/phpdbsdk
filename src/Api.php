@@ -1,6 +1,9 @@
 <?php
 namespace Slingshot;
 use Slingshot\Connection;
+use Slingshot\Models\Entity;
+use Slingshot\Models\Relation;
+use Slingshot\Set;
 
 class Api {
 

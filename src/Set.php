@@ -1,6 +1,9 @@
 <?php
-namespace MERDE;
-use MERDE\Connection;
+namespace Slingshot;
+use Slingshot\Models\Entity;
+use Slingshot\Models\Relation;
+use Slingshot\Set;
+use Slingshot\Api;
 
 class Set {
 

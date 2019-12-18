@@ -1,6 +1,7 @@
 <?php
 namespace Slingshot\Models;
 use Slingshot\Api;
+use Slingshot\Set;
 
 class Relation  {
     
