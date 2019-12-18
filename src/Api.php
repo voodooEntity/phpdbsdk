@@ -224,7 +224,8 @@ class Api {
                     $relation["Properties"],
                     $relation["Context"]
                 );
-
+                
+                // add it to the set
                 $set->addRelation(
                     $relation["SourceType"],
                     $relation["SourceID"],
