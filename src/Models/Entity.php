@@ -126,7 +126,7 @@ class Entity  {
         );
     }
 
-    private function setChildren($children) {
+    public function setChildren($children) {
         $this->children = $children;
     }
     
