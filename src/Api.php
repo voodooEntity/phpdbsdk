@@ -201,6 +201,9 @@ class Api {
         // we just return the data
         if(false == $this->transformFlag) {
             return $data;
+        } else {
+            // preset in case we only get relations but no entities
+            $set = new Set();
         }
 
         // if there are any entities
@@ -230,6 +233,7 @@ class Api {
 
         // first we go through the entities
         foreach ($data as $entity) {
+            var_dump($entity);
             // transform´the entity API data to entity instance
             $newEntity = new Entity();
             $newEntity->inject(
