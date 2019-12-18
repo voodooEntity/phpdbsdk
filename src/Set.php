@@ -16,7 +16,7 @@ class Set {
 
     public function addEntity($type,$id,$entity) {
         // make sure sub array of type exists
-        if(!isset($this->data[$type])) {
+        if(!isset($this->entities[$type])) {
             $this->entities[$type] = [];
         }
 
@@ -81,7 +81,6 @@ class Set {
     }
 
 
-    
 }
 
 
