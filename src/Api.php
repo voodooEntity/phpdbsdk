@@ -232,7 +232,7 @@ class Api {
         $set = new Set();
 
         // first we go through the entities
-        foreach ($data["Entities"] as $entity) {
+        foreach ($data as $entity) {
             // transform´the entity API data to entity instance
             $newEntity = new Entity();
             $newEntity->inject(
@@ -256,6 +256,8 @@ class Api {
                 $newEntity
             );
         }
+
+        return $set;
     }
 
 }
