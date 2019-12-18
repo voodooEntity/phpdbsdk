@@ -15,9 +15,6 @@ class Api {
         if($transformFlag) {
             $this->enableReturnTransform();
         }
-
-        // init a guzzle client for requests
-        $this->client = Connection::getGuzzleClient();
     }
 
     public function enableReturnTransform() {
@@ -30,7 +27,7 @@ class Api {
 
     public function getEntityTypes() {
         $path = "getEntityTypes";
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         return $data;
     }
@@ -41,7 +38,7 @@ class Api {
         if(false !== $traverse) {
             $path .= "&traverse=" . $traverse;
         }
-        $ret = $this->client->request("GET",$path);
+        $ret = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -50,7 +47,7 @@ class Api {
     public function getEntitiesByType($type) {
         // build the request string
         $path = "getEntitiesByType?type=" . $type;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -58,7 +55,7 @@ class Api {
 
     public function getEntitiesByTypeAndValue($type,$value) {
         $path = "getEntitiesByTypeAndValue?type=" . $type . "&value=" . $value;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -66,7 +63,7 @@ class Api {
 
     public function getEntitiesByValue($value) {
         $path = "getEntitiesByValue?value=" . $value;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -74,7 +71,7 @@ class Api {
 
     public function getParentEntities($type,$id) {
         $path = "getParentEntities?type=" . $type . "&id=" . $id;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -82,7 +79,7 @@ class Api {
 
     public function getChildEntities($type,$id) {
         $path = "getChildEntities?type=" . $type . "&id=" . $id;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -92,7 +89,7 @@ class Api {
         if([] == $properties) {
             $properties = new \stdClass();
         }
-        $ret = $this->client->request("POST", "createEntity", [
+        $ret = Connection::getGuzzleClient()->request("POST", "createEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
                 "Value" => $value,
@@ -108,7 +105,7 @@ class Api {
         if([] == $properties) {
             $properties = new \stdClass();
         }
-        $ret = $this->client->request("PUT", "updateEntity", [
+        $ret = Connection::getGuzzleClient()->request("PUT", "updateEntity", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'Type' => $type,
                 'ID' => $id,
@@ -123,7 +120,7 @@ class Api {
     
     public function deleteEntity($type,$id) {
         $path = "deleteEntity?id=" . $id . "&type=" . $type; 
-        $ret = $this->client->request("DELETE", $path);
+        $ret = Connection::getGuzzleClient()->request("DELETE", $path);
         $this->parseReturn($ret);
     }
 
@@ -137,7 +134,7 @@ class Api {
 
     public function getRelation($srcType,$srcID,$targetType,$targetID) {
         $path = "getRelation?srcType=" . $srcType . "&srcID=" . $srcID . "&targetType=" . $targetType . "&targetID=" . $targetID;
-        $ret  = $this->client->request("GET",$path);
+        $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
@@ -147,7 +144,7 @@ class Api {
         if([] == $properties) {
             $properties = new \stdClass();
         }
-        $ret = $this->client->request("POST", "createRelation", [
+        $ret = Connection::getGuzzleClient()->request("POST", "createRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'SourceType' => $srcType,
                 "SourceID" => $srcID,
@@ -165,7 +162,7 @@ class Api {
         if([] == $properties) {
             $properties = new \stdClass();
         }
-        $ret = $this->client->request("PUT", "updateRelation", [
+        $ret = Connection::getGuzzleClient()->request("PUT", "updateRelation", [
             \GuzzleHttp\RequestOptions::JSON => [
                 'SourceType' => $srcType,
                 "SourceID" => $srcID,
@@ -181,7 +178,7 @@ class Api {
     
     public function deleteRelation($srcType,$srcID,$targetType,$targetID){
         $path = "deleteRelation?srcType=" . $srcType . "&srcID=" . $srcID . "&targetType=" . $targetType ."&targetID=" . $targetID; 
-        $ret = $this->client->request("DELETE", $path);
+        $ret = Connection::getGuzzleClient()->request("DELETE", $path);
         $this->parseReturn($ret);
     }
     
