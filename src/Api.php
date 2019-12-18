@@ -214,12 +214,23 @@ class Api {
         // if there are relations
         if(0 < count($data["Relations"])) {
             foreach($data["Relations"] as $relation) {
+                // prepare the new relation
+                $newRelation = new Relation();
+                $newRelation->inject(
+                    $relation["SourceType"],
+                    $relation["SourceID"],
+                    $relation["TargetType"],
+                    $relation["TargetID"],
+                    $relation["Properties"],
+                    $relation["Context"]
+                );
+
                 $set->addRelation(
                     $relation["SourceType"],
                     $relation["SourceID"],
                     $relation["TargetType"],
                     $relation["TargetID"],
-                    $relation
+                    $newRelation
                 );
             }
         }
