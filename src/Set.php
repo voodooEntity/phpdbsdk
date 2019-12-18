@@ -50,8 +50,14 @@ class Set {
 
         // build the ret
         if(0 < count($this->relations)) {
-            foreach($this->relations as $relation) {
-                $arrRet[] = $relation;
+            foreach($this->relations as $sourceTypes) {
+                foreach($sourceTypes as $sourceIDs) {
+                    foreach($sourceIDs as $targetTypes) {
+                        foreach($targetTypes as $relation) {
+                            $arrRet[] = $relation;
+                        }
+                    }
+                }
             }
         }
 
