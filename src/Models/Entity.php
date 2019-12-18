@@ -10,6 +10,7 @@ class Entity  {
     private $context = null;
     private $value = null;
     private $exists = false;
+    private $children;
     private $api;
     
     public function __construct($type = false, $id = false) {
@@ -80,6 +81,14 @@ class Entity  {
     public function getValue() {
         return $this->value;
     }
+
+    private function toogleExistence() {
+        if(true == $this->exists) {
+            $this->exists = false;
+        } else {
+            $this->exists = true;
+        }
+    }
     
     private function __load($type,$id) {
         $ret = $this->api->getEntityByTypeAndId($type,$id);
@@ -115,6 +124,10 @@ class Entity  {
             $this->getContext()
         );
     }
+
+    private function setChildren($children) {
+        $this->children = $children;
+    }
     
     private function __create() {
         $data = $this->api->createEntity(
@@ -123,9 +136,17 @@ class Entity  {
             $this->getproperties(),
             $this->getContext()
         );
-        var_dump($data);
         $this->setID($data["Entities"][0]["ID"]);
         $this->exists = 1;
+    }
+
+    public function inject($type,$id,$value,$properties,$context) {
+        $this->setType($type);
+        $this->setID($id);
+        $this->setValue($value);
+        $this->setProperties($properties);
+        $this->setContext($context);
+        $this->toogleExistence();
     }
     
     private function __delete() {
@@ -134,5 +155,5 @@ class Entity  {
             $this->getID()
         );
     }
-    
+
 }

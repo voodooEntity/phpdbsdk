@@ -3,9 +3,26 @@ namespace Slingshot;
 use Slingshot\Connection;
 
 class Api {
+
+    private $transformFlag = false;
     
-    public function __construct() {
+    public function __construct($transformFlag = false) {
+        // if there is a transform flag given change
+        // the mode
+        if($transformFlag) {
+            $this->enableReturnTransform();
+        }
+
+        // init a guzzle client for requests
         $this->client = Connection::getGuzzleClient();
+    }
+
+    public function enableReturnTransform() {
+        $this->transformFlag = true;
+    }
+
+    public function disableReturnTransform() {
+        $this->transformFlag = false;
     }
 
     public function getEntityTypes() {
@@ -23,7 +40,8 @@ class Api {
         }
         $ret = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
     
     public function getEntitiesByType($type) {
@@ -31,43 +49,40 @@ class Api {
         $path = "getEntitiesByType?type=" . $type;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
 
     public function getEntitiesByTypeAndValue($type,$value) {
         $path = "getEntitiesByTypeAndValue?type=" . $type . "&value=" . $value;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
 
     public function getEntitiesByValue($value) {
         $path = "getEntitiesByValue?value=" . $value;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
 
     public function getParentEntities($type,$id) {
         $path = "getParentEntities?type=" . $type . "&id=" . $id;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
 
     public function getChildEntities($type,$id) {
         $path = "getChildEntities?type=" . $type . "&id=" . $id;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
-    }
-    
-    public function parseReturn($ret) {
-        $data = $ret->getBody();
-        if($ret->getStatusCode() != 200) {
-            throw new \Exception($data);
-        }
-        return json_decode($data,true);
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
     
     public function createEntity($type,$value,$properties = [],$context = "") {
@@ -121,7 +136,8 @@ class Api {
         $path = "getRelation?srcType=" . $srcType . "&srcID=" . $srcID . "&targetType=" . $targetType . "&targetID=" . $targetID;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        return $data;
+        $transformed = $this->transformReturn($data)
+        return $transformed;
     }
     
     public function createRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
@@ -166,4 +182,77 @@ class Api {
         $this->parseReturn($ret);
     }
     
+    public function parseReturn($ret) {
+        // retrieve the message body
+        $data = $ret->getBody();
+
+        // check if the return code is fine, else
+        // throw an exception
+        if($ret->getStatusCode() != 200) {
+            throw new \Exception($data);
+        }
+
+        // seems fine lets decode that stuff
+        return json_decode($data,true);
+    }
+
+    private function transformReturn($data) {
+        // if we dont have a transform flag,
+        // we just return the data
+        if(false == $this->transformFlag) {
+            return $data;
+        }
+
+        // if there are any entities
+        if(0 < count($data["Entities"])) {
+            $set = $this->recusriveTransformChildren($data["Entities"]);
+        }
+
+        // if there are relations
+        if(0 < count($data["Relations"])) {
+            foreach($data["Relations"] as $relation) {
+                $set->addRelation(
+                    $relation["SourceType"],
+                    $relation["SourceID"],
+                    $relation["TargetType"],
+                    $relation["TargetID"],
+                    $relation
+                );
+            }
+        }
+
+        return $set;
+    }
+
+    private function recursiveTransformChildren($arrEntities) {
+        // prepare a set
+        $set = new Set();
+
+        // first we go through the entities
+        foreach $data["Entities"] as $entity {
+            // transform´the entity API data to entity instance
+            $newEntity = new Entity();
+            $newEntity->inject(
+                $entity["Type"],
+                $entity["ID"],
+                $entity["Value"],
+                $entity["Properties"],
+                $entity["Context"]
+            );
+            
+            // if there are children
+            if(0 < count($entity["Children"])) {
+                // walk recursive through them and add them as set
+                $newEntity->setChildren($this->recursiveTransformChildren($entity["Children"]));
+            }
+
+            // finally we add the entity to the set
+            $set->addEntity(
+                $entity["Type"],
+                $entity["ID"],
+                $newEntity
+            );
+        }
+    }
+
 }

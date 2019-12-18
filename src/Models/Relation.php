@@ -153,5 +153,23 @@ class Relation  {
             $this->getTargetID()
         );
     }
+
+    public function inject($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+        $this->setSourceType($srcType);
+        $this->setSourceID($srcID);
+        $this->setTargetType($targetType);
+        $this->setTargetID($targetID);
+        $this->setProperties($properties);
+        $this->setContext($context);
+        $this->toogleExistence();
+    }
+
+    private function toogleExistence() {
+        if(true == $this->exists) {
+            $this->exists = false;
+        } else {
+            $this->exists = true;
+        }
+    }
     
 }
