@@ -77,7 +77,7 @@ class Set {
         }
 
         // return the entities
-        return $entity;
+        return $arrRet;
     }
 
 
