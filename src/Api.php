@@ -40,7 +40,7 @@ class Api {
         }
         $ret = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
     
@@ -49,7 +49,7 @@ class Api {
         $path = "getEntitiesByType?type=" . $type;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
 
@@ -57,7 +57,7 @@ class Api {
         $path = "getEntitiesByTypeAndValue?type=" . $type . "&value=" . $value;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
 
@@ -65,7 +65,7 @@ class Api {
         $path = "getEntitiesByValue?value=" . $value;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
 
@@ -73,7 +73,7 @@ class Api {
         $path = "getParentEntities?type=" . $type . "&id=" . $id;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
 
@@ -81,7 +81,7 @@ class Api {
         $path = "getChildEntities?type=" . $type . "&id=" . $id;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
     
@@ -136,7 +136,7 @@ class Api {
         $path = "getRelation?srcType=" . $srcType . "&srcID=" . $srcID . "&targetType=" . $targetType . "&targetID=" . $targetID;
         $ret  = $this->client->request("GET",$path);
         $data = $this->parseReturn($ret);
-        $transformed = $this->transformReturn($data)
+        $transformed = $this->transformReturn($data);
         return $transformed;
     }
     
