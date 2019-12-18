@@ -233,7 +233,6 @@ class Api {
 
         // first we go through the entities
         foreach ($data as $entity) {
-            var_dump($entity);
             // transform´the entity API data to entity instance
             $newEntity = new Entity();
             $newEntity->inject(
