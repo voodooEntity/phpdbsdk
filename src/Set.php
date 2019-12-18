@@ -44,6 +44,21 @@ class Set {
         $this->relations[$sourceType][$sourceID][$targetType][$targetID] = $relation;
     }
 
+    public function getRelations() {
+        // prepare the ret
+        $arrRet= [];
+
+        // build the ret
+        if(0 < count($this->relations)) {
+            foreach($this->relations as $relation) {
+                $arrRet[] = $relation;
+            }
+        }
+
+        // return the relations
+        return $arrRet;
+    }
+
 
 
     public function getEntity($type,$id) {
