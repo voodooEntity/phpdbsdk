@@ -241,7 +241,7 @@ class Api {
             );
             
             // if there are children
-            if(0 < count($entity["Children"])) {
+            if(isset($entity["Children"]) && 0 < count($entity["Children"])) {
                 // walk recursive through them and add them as set
                 $newEntity->setChildren($this->recursiveTransformChildren($entity["Children"]));
             }
