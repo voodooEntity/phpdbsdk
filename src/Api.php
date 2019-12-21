@@ -53,16 +53,24 @@ class Api {
         return $transformed;
     }
 
-    public function getEntitiesByTypeAndValue($type,$value) {
-        $path = "getEntitiesByTypeAndValue?type=" . $type . "&value=" . $value;
+    public function getEntitiesByTypeAndValue($type,$value,$mode = false) {
+        $addMode = "";
+        if($mode) {
+            $addMode = "&mode=" . $mode;
+        }
+        $path = "getEntitiesByTypeAndValue?type=" . $type . "&value=" . $value . $addMode;
         $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
         return $transformed;
     }
 
-    public function getEntitiesByValue($value) {
-        $path = "getEntitiesByValue?value=" . $value;
+    public function getEntitiesByValue($value,$mode = false) {
+        $addMode = "";
+        if($mode) {
+            $addMode = "&mode=" . $mode;
+        }
+        $path = "getEntitiesByValue?value=" . $value . $addMode;
         $ret  = Connection::getGuzzleClient()->request("GET",$path);
         $data = $this->parseReturn($ret);
         $transformed = $this->transformReturn($data);
