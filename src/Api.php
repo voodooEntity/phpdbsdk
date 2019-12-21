@@ -119,7 +119,7 @@ class Api {
                 'ID' => $id,
                 "Value" => $value,
                 "Properties" => $properties,
-                "Context" => $context
+                "Context" => $context,
                 "Version" => $version
             ]
         ]);
@@ -167,7 +167,7 @@ class Api {
         return $data;
     }
     
-    public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "") {
+    public function updateRelation($srcType,$srcID,$targetType,$targetID,$properties = [],$context = "",$version) {
         if([] == $properties) {
             $properties = new \stdClass();
         }
@@ -178,7 +178,8 @@ class Api {
                 'TargetType' => $targetType,
                 "TargetID" => $targetID,
                 "Properties" => $properties,
-                "Context" => $context
+                "Context" => $context,
+                "Version" => $version
             ]
         ]);
         $data = $this->parseReturn($ret);
