@@ -10,6 +10,7 @@ class Entity  {
     private $properties = null;
     private $context = null;
     private $value = null;
+    private $version = null;
     private $exists = false;
     private $children;
     private $api;
@@ -83,6 +84,14 @@ class Entity  {
         return $this->value;
     }
 
+    public function getVersion() {
+        return $this->version;
+    }
+
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
     private function toogleExistence() {
         if(true == $this->exists) {
             $this->exists = false;
@@ -100,6 +109,7 @@ class Entity  {
         $this->setValue($entity["Value"]);
         $this->setProperties($entity["Properties"]);
         $this->setContext($entity["Context"]);
+        $this->setVersion($entity["Version"]);
     }
     
     public function save($create = true) {
@@ -122,7 +132,8 @@ class Entity  {
             $this->getID(),
             $this->getValue(),
             $this->getproperties(),
-            $this->getContext()
+            $this->getContext(),
+            $this->getVersion()
         );
     }
 
@@ -141,12 +152,13 @@ class Entity  {
         $this->exists = 1;
     }
 
-    public function inject($type,$id,$value,$properties,$context) {
+    public function inject($type,$id,$value,$properties,$context,$version) {
         $this->setType($type);
         $this->setID($id);
         $this->setValue($value);
         $this->setProperties($properties);
         $this->setContext($context);
+        $this->setVersion($version);
         $this->toogleExistence();
     }
     

@@ -101,7 +101,7 @@ class Api {
         return $data;
     }
     
-    public function updateEntity($type,$id,$value,$properties = [],$context = "") {
+    public function updateEntity($type,$id,$value,$properties = [],$context = "",$version) {
         if([] == $properties) {
             $properties = new \stdClass();
         }
@@ -112,6 +112,7 @@ class Api {
                 "Value" => $value,
                 "Properties" => $properties,
                 "Context" => $context
+                "Version" => $version
             ]
         ]);
         $data = $this->parseReturn($ret);
@@ -222,7 +223,8 @@ class Api {
                     $relation["TargetType"],
                     $relation["TargetID"],
                     $relation["Properties"],
-                    $relation["Context"]
+                    $relation["Context"],
+                    $relation["Version"]
                 );
                 
                 // add it to the set
@@ -252,7 +254,8 @@ class Api {
                 $entity["ID"],
                 $entity["Value"],
                 $entity["Properties"],
-                $entity["Context"]
+                $entity["Context"],
+                $entity["Version"]
             );
             
             // if there are children

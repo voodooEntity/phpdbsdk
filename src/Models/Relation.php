@@ -11,6 +11,7 @@ class Relation  {
     private $targetType = null;
     private $properties = null;
     private $context = null;
+    private $version = null;
     private $exists = false;
     private $api;
     
@@ -97,6 +98,14 @@ class Relation  {
         return null;
     }
 
+    public function getVersion() {
+        return $this->version;
+    }
+
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
     private function __load($sourceType,$sourceID,$targetType,$targetID) {
         $ret = $this->api->getRelation($sourceType,$sourceID,$targetType,$targetID);
         $this->setSourceType($sourceType);
@@ -107,6 +116,7 @@ class Relation  {
         $relation = $ret["Relations"][0];
         $this->setProperties($relation["Properties"]);
         $this->setContext($relation["Context"]);
+        $this->setVersion($relation["Version"]);
     }
     
     public function save($create = true) {
@@ -130,7 +140,8 @@ class Relation  {
             $this->getTargetType(),
             $this->getTargetID(),
             $this->getProperties(),
-            $this->getContext()
+            $this->getContext(),
+            $this->getVersion()
         );
     }
     
@@ -155,13 +166,14 @@ class Relation  {
         );
     }
 
-    public function inject($srcType,$srcID,$targetType,$targetID,$properties,$context) {
+    public function inject($srcType,$srcID,$targetType,$targetID,$properties,$context,$version) {
         $this->setSourceType($srcType);
         $this->setSourceID($srcID);
         $this->setTargetType($targetType);
         $this->setTargetID($targetID);
         $this->setProperties($properties);
         $this->setContext($context);
+        $this->setVersion($version);
         $this->toogleExistence();
     }
 
