@@ -135,6 +135,7 @@ class Entity  {
             $this->getContext(),
             $this->getVersion()
         );
+        $this->__load($this->getType(),$this->getID();
     }
 
     public function setChildren($children) {

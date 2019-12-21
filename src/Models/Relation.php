@@ -143,6 +143,7 @@ class Relation  {
             $this->getContext(),
             $this->getVersion()
         );
+         $this->__load($this->getSourceType(),$this->getSourceID(),$this->getTargetType(),$this->getTargetID());
     }
     
     private function __create() {
